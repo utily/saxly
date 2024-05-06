@@ -6,10 +6,12 @@
 		"sourceRoot": "../",
 		"outDir": "dist",
 		"baseUrl": ".",
-		"allowSyntheticDefaultImports":true,
+		"allowSyntheticDefaultImports": true,
 		"types": []
 	},
 	"files": [
 		"index.ts",
+		"./Parser/ErrorType.ts",
+		"./Parser/Parser.ts",
 	]
 }

@@ -3,10 +3,7 @@ export class AsyncEnumerator<T> {
 	protected onRead(element: T): void {
 		return
 	}
-	constructor(
-		private readonly backend: AsyncIterator<T>,
-		private readonly type: { new (backend: AsyncIterator<T>): AsyncEnumerator<T> }
-	) {}
+	constructor(private readonly backend: AsyncIterator<T>) {}
 	async peek(): Promise<T | undefined> {
 		return !this.current ? await this.read() : this.current.done ? undefined : this.current.value
 	}
@@ -21,15 +18,17 @@ export class AsyncEnumerator<T> {
 		const peeked = await this.peek()
 		return peeked && predicate(peeked) ? await this.read() : undefined
 	}
-	until(predicate: (element: T) => boolean): ThisType<T> {
-		return new this.type(
-			(async function* () {
-				let result: T | undefined = await this.peek()
-				while (result && predicate(result)) {
-					yield this.read()
-					result = await this.peek()
-				}
-			})()
-		)
+	private async *generator(predicate: (element: T) => boolean): AsyncGenerator<T> {
+		let result: T | undefined = await this.peek()
+		while (result && predicate(result)) {
+			yield result
+			await this.read()
+			result = await this.peek()
+		}
+	}
+	until(predicate: (element: T) => boolean): this {
+		return new (this.constructor as { new (backend: AsyncIterator<T>): AsyncEnumerator<T> })(
+			this.generator(predicate)
+		) as this
 	}
 }

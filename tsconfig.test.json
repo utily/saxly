@@ -3,7 +3,7 @@
 		"target": "es2021",
 		"module": "es2020",
 		"lib": [
-			"es2021",
+			"es2022",
 			"webworker"
 		],
 		"allowJs": true,
@@ -24,7 +24,9 @@
 				"types/*"
 			]
 		},
-		"types": ["jest"]
+		"types": [
+			"jest"
+		]
 	},
 	"files": [
 		"index.ts"
