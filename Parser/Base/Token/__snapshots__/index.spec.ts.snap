@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`saxly.Parser.Base.Token parse <root/> 1`] = `
+Array [
+  Token {
+    "content": "<",
+    "range": Object {
+      "end": Object {
+        "column": 1,
+        "row": 0,
+      },
+      "start": Object {
+        "column": 0,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": "root",
+    "range": Object {
+      "end": Object {
+        "column": 2,
+        "row": 0,
+      },
+      "start": Object {
+        "column": 1,
+        "row": 0,
+      },
+    },
+    "type": "text",
+  },
+  Token {
+    "content": "/>",
+    "range": Object {
+      "end": Object {
+        "column": 3,
+        "row": 0,
+      },
+      "start": Object {
+        "column": 2,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+]
+`;
+
+exports[`saxly.Parser.Base.Token parse <root></root> 1`] = `
+Array [
+  Token {
+    "content": "<",
+    "range": Object {
+      "end": Object {
+        "column": 1,
+        "row": 0,
+      },
+      "start": Object {
+        "column": 0,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": "root",
+    "range": Object {
+      "end": Object {
+        "column": 2,
+        "row": 0,
+      },
+      "start": Object {
+        "column": 1,
+        "row": 0,
+      },
+    },
+    "type": "text",
+  },
+  Token {
+    "content": ">",
+    "range": Object {
+      "end": Object {
+        "column": 3,
+        "row": 0,
+      },
+      "start": Object {
+        "column": 2,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": "</",
+    "range": Object {
+      "end": Object {
+        "column": 4,
+        "row": 0,
+      },
+      "start": Object {
+        "column": 3,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": "root",
+    "range": Object {
+      "end": Object {
+        "column": 5,
+        "row": 0,
+      },
+      "start": Object {
+        "column": 4,
+        "row": 0,
+      },
+    },
+    "type": "text",
+  },
+  Token {
+    "content": ">",
+    "range": Object {
+      "end": Object {
+        "column": 6,
+        "row": 0,
+      },
+      "start": Object {
+        "column": 5,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+]
+`;

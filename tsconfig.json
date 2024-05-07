@@ -11,7 +11,5 @@
 	},
 	"files": [
 		"index.ts",
-		"./Parser/ErrorType.ts",
-		"./Parser/Parser.ts",
 	]
 }

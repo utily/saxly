@@ -10,25 +10,26 @@ export class Token {
 		return !token ? this : new Token(this.type, this.content + token.content, Range.merge(this.range, token.range))
 	}
 	static async *tokenize(data: AsyncIterable<string> | string): AsyncIterable<Token> {
-		if (typeof data == "string")
+		if (typeof data == "string") {
+			const d = data
 			data = (async function* () {
-				yield Promise.resolve(data)
+				yield Promise.resolve(d)
 			})()
+		}
 		let last: Token | undefined
 		let start = { row: 0, column: 0 }
 		for await (const chunk of data) {
-			if (typeof chunk == "string")
-				for (const character of chunk) {
-					const type = characterType(character)
-					if (last && type == last?.type && (type != "symbol" || combinedSymbol(last.content + character)))
-						last = last.append(character)
-					else {
-						if (last)
-							yield last
-						last = new Token(type, character, { start, end: Position.add(start, character) })
-					}
-					start = last.range.end
+			for (const character of chunk) {
+				const type = characterType(character)
+				if (last && type == last?.type && (type != "symbol" || combinedSymbol(last.content + character)))
+					last = last.append(character)
+				else {
+					if (last)
+						yield last
+					last = new Token(type, character, { start, end: Position.add(start, character) })
 				}
+				start = last.range.end
+			}
 		}
 		if (last)
 			yield last

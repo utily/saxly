@@ -42,6 +42,9 @@ export abstract class Base {
 				if (!(await tokens.readIfSymbol("?>")))
 					this.onError("expected declaration end", tokens.range)
 				this.onDeclaration(type, attributes)
+			} else {
+				this.onError("unknown", tokens.range)
+				await tokens.read()
 			}
 		}
 	}

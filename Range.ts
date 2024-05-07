@@ -1,3 +1,4 @@
+import { isly } from "isly"
 import { Position } from "./Position"
 
 export interface Range {
@@ -6,6 +7,9 @@ export interface Range {
 }
 
 export namespace Range {
+	export const type = isly.object<Range>({ start: Position.type, end: Position.type }, "Range")
+	export const is = type.is
+	export const flaw = type.flaw
 	export function merge(left: Range, right: Range): Range {
 		return { start: Position.min(left.end, right.end), end: Position.max(left.end, right.end) }
 	}

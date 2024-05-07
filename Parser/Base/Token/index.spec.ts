@@ -9,7 +9,6 @@ async function tokenize(data: string): Promise<Token[]> {
 }
 
 describe("saxly.Parser.Base.Token", () => {
-	it("parse empty root", async () => {
-		expect(await tokenize("<root/>")).toMatchInlineSnapshot()
-	})
+	it("parse <root/>", async () => expect(await tokenize("<root/>")).toMatchSnapshot())
+	it("parse <root></root>", async () => expect(await tokenize("<root></root>")).toMatchSnapshot())
 })

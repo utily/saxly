@@ -1,0 +1,236 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`saxly.Parser parse <root attribute="value">
+Text<element key="value" readonly>last name</element></root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [
+    {
+      "error": "expected start element end",
+      "range": {
+        "end": {
+          "column": 7,
+          "row": 0,
+        },
+        "start": {
+          "column": 6,
+          "row": 0,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 7,
+          "row": 0,
+        },
+        "start": {
+          "column": 6,
+          "row": 0,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 8,
+          "row": 0,
+        },
+        "start": {
+          "column": 7,
+          "row": 0,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 0,
+          "row": 1,
+        },
+        "start": {
+          "column": 9,
+          "row": 0,
+        },
+      },
+    },
+    {
+      "error": "expected start element end",
+      "range": {
+        "end": {
+          "column": 8,
+          "row": 1,
+        },
+        "start": {
+          "column": 7,
+          "row": 1,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 8,
+          "row": 1,
+        },
+        "start": {
+          "column": 7,
+          "row": 1,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 10,
+          "row": 1,
+        },
+        "start": {
+          "column": 9,
+          "row": 1,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 11,
+          "row": 1,
+        },
+        "start": {
+          "column": 10,
+          "row": 1,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 12,
+          "row": 1,
+        },
+        "start": {
+          "column": 11,
+          "row": 1,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 14,
+          "row": 1,
+        },
+        "start": {
+          "column": 13,
+          "row": 1,
+        },
+      },
+    },
+  ],
+  "root": {
+    "attributes": {
+      "attribute": undefined,
+      "value": undefined,
+    },
+    "content": [
+      {
+        "attributes": {
+          "key": undefined,
+          "value": undefined,
+        },
+        "content": [],
+        "name": "element",
+      },
+    ],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root attribute="value"></root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [
+    {
+      "error": "expected start element end",
+      "range": {
+        "end": {
+          "column": 7,
+          "row": 0,
+        },
+        "start": {
+          "column": 6,
+          "row": 0,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 7,
+          "row": 0,
+        },
+        "start": {
+          "column": 6,
+          "row": 0,
+        },
+      },
+    },
+    {
+      "error": "unknown",
+      "range": {
+        "end": {
+          "column": 8,
+          "row": 0,
+        },
+        "start": {
+          "column": 7,
+          "row": 0,
+        },
+      },
+    },
+  ],
+  "root": {
+    "attributes": {
+      "attribute": undefined,
+      "value": undefined,
+    },
+    "content": [],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root/> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [],
+  "root": {
+    "attributes": {},
+    "content": [],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root></root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [],
+  "root": {
+    "attributes": {},
+    "content": [],
+    "name": "root",
+  },
+}
+`;

@@ -5,14 +5,15 @@ export class AsyncEnumerator<T> {
 	}
 	constructor(private readonly backend: AsyncIterator<T>) {}
 	async peek(): Promise<T | undefined> {
-		return !this.current ? await this.read() : this.current.done ? undefined : this.current.value
+		const result: IteratorResult<T> = (this.current ??= await this.backend.next())
+		return result.done ? undefined : result.value
 	}
 	async read(): Promise<T | undefined> {
-		const result = this.current
+		const result = await this.peek()
 		this.current = await this.backend.next()
-		if (!this.current.done)
-			this.onRead(this.current.value)
-		return !result ? this.read() : result.done ? undefined : result.value
+		if (result)
+			this.onRead(result)
+		return result
 	}
 	async readIf(predicate: (element: T) => boolean): Promise<T | undefined> {
 		const peeked = await this.peek()
