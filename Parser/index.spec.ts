@@ -27,4 +27,6 @@ describe("saxly.Parser", () => {
 		expect(
 			await saxly.Parser.parse('<root attribute="value">\nText<element key="value" readonly>last name</element></root>')
 		).toMatchSnapshot())
+	it("parse <root>  first middle last</root>", async () =>
+		expect(await saxly.Parser.parse("<root>\n  first middle last\n</root>")).toMatchSnapshot())
 })

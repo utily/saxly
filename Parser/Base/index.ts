@@ -12,7 +12,6 @@ export abstract class Base {
 	async parse(data: AsyncIterable<string> | string): Promise<void> {
 		const tokens = Tokens.tokenize(data)
 		while (await tokens.peek()) {
-			await tokens.readWhitespace()
 			if (await tokens.readIfSymbol("<")) {
 				await tokens.readWhitespace()
 				const name = (await tokens.readIfName())?.content ?? ""
@@ -34,9 +33,9 @@ export abstract class Base {
 				if (!(await tokens.readIfSymbol(">")))
 					this.onError("expected end element end", tokens.range)
 				this.onEndElement(name)
-			} else if (await tokens.is("text")) {
+			} else if ((await tokens.is("text")) || (await tokens.is("whitespace"))) {
 				const text = await tokens.read()
-				if (text?.type == "text")
+				if (text?.type == "text" || text?.type == "whitespace")
 					this.onText(text.content)
 			} else if (await tokens.readIfSymbol("<?")) {
 				await tokens.readWhitespace()

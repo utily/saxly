@@ -29,6 +29,8 @@ Text<element key="value" readonly>last name</element></root> 1`] = `
       "attribute": "value",
     },
     "content": [
+      "
+",
       "Text",
       {
         "attributes": {
@@ -37,6 +39,7 @@ Text<element key="value" readonly>last name</element></root> 1`] = `
         },
         "content": [
           "last",
+          " ",
           "name",
         ],
         "name": "element",
@@ -82,6 +85,28 @@ exports[`saxly.Parser parse <root/> 1`] = `
   "root": {
     "attributes": {},
     "content": [],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root>  first middle last</root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [],
+  "root": {
+    "attributes": {},
+    "content": [
+      "
+  ",
+      "first",
+      " ",
+      "middle",
+      " ",
+      "last",
+      "
+",
+    ],
     "name": "root",
   },
 }
@@ -167,6 +192,7 @@ exports[`saxly.Parser parse <root>first name</root> 1`] = `
     "attributes": {},
     "content": [
       "first",
+      " ",
       "name",
     ],
     "name": "root",
