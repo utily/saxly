@@ -6,3 +6,4 @@ export type ErrorType =
 	| "expected attribute value"
 	| "expected declaration type"
 	| "expected declaration end"
+	| "expected end quote"

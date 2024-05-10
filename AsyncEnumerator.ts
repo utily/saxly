@@ -20,16 +20,20 @@ export class AsyncEnumerator<T> {
 		return peeked && predicate(peeked) ? await this.read() : undefined
 	}
 	private async *generator(predicate: (element: T) => boolean): AsyncGenerator<T> {
-		let result: T | undefined = await this.peek()
-		while (result && predicate(result)) {
-			yield result
+		let peeked = await this.peek()
+		while (peeked && predicate(peeked)) {
 			await this.read()
-			result = await this.peek()
+			const result = peeked
+			peeked = await this.peek()
+			yield result
 		}
 	}
-	until(predicate: (element: T) => boolean): this {
+	while(predicate: (element: T) => boolean): this {
 		return new (this.constructor as { new (backend: AsyncIterator<T>): AsyncEnumerator<T> })(
 			this.generator(predicate)
 		) as this
+	}
+	until(predicate: (element: T) => boolean): this {
+		return this.while(element => !predicate(element))
 	}
 }

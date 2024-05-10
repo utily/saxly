@@ -27,8 +27,16 @@ export class Tokens extends AsyncEnumerator<Token> {
 		return this.readIf(token => token.content == content)
 	}
 	private async readIfType(type: Token["type"], ...contents: string[]): Promise<Token | undefined> {
-		return this.readIf(token => token.type == type && (!contents.length || contents.some(c => c == token.content)))
+		return this.readIf(this.getPredicate(type, contents))
 	}
+	private getPredicate(type: string, contents: string[]): (element: Token) => boolean {
+		return !contents.length
+			? token => token.type == type
+			: contents.length == 1
+			? token => token.type == type && token.content == contents[0]
+			: token => token.type == type && contents.some(c => c == token.content)
+	}
+
 	async readIfSymbol(...contents: string[]): Promise<Token | undefined> {
 		return this.readIfType("symbol", ...contents)
 	}
@@ -45,7 +53,7 @@ export class Tokens extends AsyncEnumerator<Token> {
 		return result.content != "" ? result : undefined
 	}
 	untilSymbol(...contents: string[]): this {
-		return this.until(token => token.type == "symbol" && (!contents.length || contents.some(c => c == token.content)))
+		return this.until(this.getPredicate("symbol", contents))
 	}
 	static tokenize(data: AsyncIterable<string> | string): Tokens {
 		return new Tokens(Token.tokenize(data)[Symbol.asyncIterator]())

@@ -1,3 +1,3 @@
 export class Symbol {
-	constructor(readonly content: string) {}	
+	constructor(readonly content: string) {}
 }

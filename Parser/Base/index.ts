@@ -1,5 +1,6 @@
 import { Range } from "../../Range"
 import { ErrorType } from "../ErrorType"
+import { Token } from "./Token"
 import { Tokens } from "./Tokens"
 
 export abstract class Base {
@@ -33,9 +34,13 @@ export abstract class Base {
 				if (!(await tokens.readIfSymbol(">")))
 					this.onError("expected end element end", tokens.range)
 				this.onEndElement(name)
+			} else if (await tokens.is("text")) {
+				const text = await tokens.read()
+				if (text?.type == "text")
+					this.onText(text.content)
 			} else if (await tokens.readIfSymbol("<?")) {
 				await tokens.readWhitespace()
-				const type = (await tokens.readIfText("xml"))?.content ?? ""
+				const type = (await tokens.readIfText())?.content ?? ""
 				if (!type)
 					this.onError("expected declaration type", tokens.range)
 				const attributes = await this.parseAttributes(tokens)
@@ -59,14 +64,17 @@ export abstract class Base {
 	private async parseAttribute(tokens: Tokens): Promise<[string, string | undefined] | undefined> {
 		await tokens.readWhitespace()
 		const name = await tokens.readIfName()
-		let quote: string | undefined
-		const value =
-			name &&
-			(await tokens.readIfSymbol("=")) &&
-			// eslint-disable-next-line no-cond-assign
-			(await ((quote = (await tokens.readIfSymbol('"', "'"))?.content)
-				? tokens.untilSymbol(quote).readAll()
-				: tokens.readIfText()))
+		let value: Token | undefined
+		if (await tokens.readIfSymbol("=")) {
+			const quote = (await tokens.readIfSymbol('"', "'"))?.content
+			if (!quote)
+				value = await tokens.readIfText()
+			else {
+				value = await tokens.untilSymbol(quote).readAll()
+				if (!(await tokens.readIfSymbol(quote)))
+					this.onError("expected end quote", tokens.range)
+			}
+		}
 		return name && [name.content, value?.content]
 	}
 }

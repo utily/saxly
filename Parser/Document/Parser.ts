@@ -5,7 +5,7 @@ import type { Document } from "."
 import { Element } from "./Element"
 import { ElementStart } from "./ElementStart"
 
-export class DocumentParser extends Base {
+export class Parser extends Base {
 	private readonly stack: (Document.Element | ElementStart | string | Document.Declaration)[] = []
 	private readonly errors: Document.Error[] = []
 	protected onStartElement(name: string, attributes: Record<string, string | undefined>): void {
@@ -13,14 +13,21 @@ export class DocumentParser extends Base {
 	}
 	protected onEndElement(name: string): void {
 		const content: Document.Element["content"] = []
-		while ((item => Element.is(item) || typeof item == "string")(this.stack.at(-1)))
-			content.push(this.stack.pop() as any as Document.Element["content"][number])
-		const start = this.stack.pop()
-		if (!(ElementStart.is(start) && start.name == name))
-			this.errors.push({ error: "expected start element", node: start })
+		let node = this.stack.pop()
+		while (!(ElementStart.is(node) && !Element.is(node))) {
+			if (Element.is(node) || typeof node == "string")
+				content.push(node)
+			else {
+				const a = [ElementStart.is(node), Element.is(node), !(ElementStart.is(node) && !Element.is(node))]
+				console.log(a)
+				this.errors.push({ error: "expected element or text", node })
+			}
+			node = this.stack.pop()
+		}
+		if (!(ElementStart.is(node) && !Element.is(node) && node.name == name))
+			this.errors.push({ error: "expected start element", node })
 		this.stack.push({
-			name,
-			attributes: typeof start == "object" && "attributes" in start ? start.attributes : {},
+			...node,
 			content,
 		})
 	}

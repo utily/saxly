@@ -37,7 +37,7 @@ export class Token {
 }
 
 function characterType(character: string): Token["type"] {
-	return character.match(/\s/) ? "whitespace" : character.match(/[<>/"=]/) ? "symbol" : "text"
+	return character.match(/\s/) ? "whitespace" : character.match(/[<>/"=?!]/) ? "symbol" : "text"
 }
 function combinedSymbol(symbol: string): boolean {
 	return (

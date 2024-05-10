@@ -1,5 +1,178 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`saxly.Parser.Base.Token parse <?xml version="1.0"?><root/> 1`] = `
+[
+  Token {
+    "content": "<?",
+    "range": {
+      "end": {
+        "column": 1,
+        "row": 0,
+      },
+      "start": {
+        "column": 0,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": "xml",
+    "range": {
+      "end": {
+        "column": 2,
+        "row": 0,
+      },
+      "start": {
+        "column": 1,
+        "row": 0,
+      },
+    },
+    "type": "text",
+  },
+  Token {
+    "content": " ",
+    "range": {
+      "end": {
+        "column": 3,
+        "row": 0,
+      },
+      "start": {
+        "column": 2,
+        "row": 0,
+      },
+    },
+    "type": "whitespace",
+  },
+  Token {
+    "content": "version",
+    "range": {
+      "end": {
+        "column": 4,
+        "row": 0,
+      },
+      "start": {
+        "column": 3,
+        "row": 0,
+      },
+    },
+    "type": "text",
+  },
+  Token {
+    "content": "=",
+    "range": {
+      "end": {
+        "column": 5,
+        "row": 0,
+      },
+      "start": {
+        "column": 4,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": """,
+    "range": {
+      "end": {
+        "column": 6,
+        "row": 0,
+      },
+      "start": {
+        "column": 5,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": "1.0",
+    "range": {
+      "end": {
+        "column": 7,
+        "row": 0,
+      },
+      "start": {
+        "column": 6,
+        "row": 0,
+      },
+    },
+    "type": "text",
+  },
+  Token {
+    "content": """,
+    "range": {
+      "end": {
+        "column": 8,
+        "row": 0,
+      },
+      "start": {
+        "column": 7,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": "?>",
+    "range": {
+      "end": {
+        "column": 9,
+        "row": 0,
+      },
+      "start": {
+        "column": 8,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": "<",
+    "range": {
+      "end": {
+        "column": 10,
+        "row": 0,
+      },
+      "start": {
+        "column": 9,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+  Token {
+    "content": "root",
+    "range": {
+      "end": {
+        "column": 11,
+        "row": 0,
+      },
+      "start": {
+        "column": 10,
+        "row": 0,
+      },
+    },
+    "type": "text",
+  },
+  Token {
+    "content": "/>",
+    "range": {
+      "end": {
+        "column": 12,
+        "row": 0,
+      },
+      "start": {
+        "column": 11,
+        "row": 0,
+      },
+    },
+    "type": "symbol",
+  },
+]
+`;
+
 exports[`saxly.Parser.Base.Token parse <root/> 1`] = `
 [
   Token {

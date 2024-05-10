@@ -11,7 +11,7 @@ export type Error =
 			range: Range
 	  }
 	| {
-			error: "expected start element"
+			error: "expected start element" | "expected element or text"
 			node: Element | ElementStart | string | Declaration | undefined
 	  }
 export namespace Error {

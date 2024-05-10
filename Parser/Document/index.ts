@@ -1,8 +1,8 @@
 import { isly } from "isly"
 import { Declaration, Declaration as DocumentDeclaration } from "./Declaration"
-import { DocumentParser } from "./DocumentParser"
 import { Element as DocumentElement, Element } from "./Element"
 import { Error as DocumentError, Error } from "./Error"
+import { Parser } from "./Parser"
 
 export interface Document {
 	declaration?: Document.Declaration
@@ -20,6 +20,6 @@ export namespace Document {
 	export type Error = DocumentError
 	export type Declaration = DocumentDeclaration
 	export function parse(data: AsyncIterable<string> | string): Promise<Document | undefined> {
-		return new DocumentParser().parseDocument(data)
+		return new Parser().parseDocument(data)
 	}
 }

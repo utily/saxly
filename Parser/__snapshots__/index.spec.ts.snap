@@ -1,49 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`saxly.Parser parse <?xml version="1.0" language="en/US"?>
+<root/> 1`] = `
+{
+  "declaration": {
+    "attributes": {
+      "language": "en/US",
+      "version": "1.0",
+    },
+    "type": "xml",
+  },
+  "errors": [],
+  "root": {
+    "attributes": {},
+    "content": [],
+    "name": "root",
+  },
+}
+`;
+
 exports[`saxly.Parser parse <root attribute="value">
 Text<element key="value" readonly>last name</element></root> 1`] = `
 {
   "declaration": undefined,
   "errors": [
-    {
-      "error": "expected start element end",
-      "range": {
-        "end": {
-          "column": 7,
-          "row": 0,
-        },
-        "start": {
-          "column": 6,
-          "row": 0,
-        },
-      },
-    },
-    {
-      "error": "unknown",
-      "range": {
-        "end": {
-          "column": 7,
-          "row": 0,
-        },
-        "start": {
-          "column": 6,
-          "row": 0,
-        },
-      },
-    },
-    {
-      "error": "unknown",
-      "range": {
-        "end": {
-          "column": 8,
-          "row": 0,
-        },
-        "start": {
-          "column": 7,
-          "row": 0,
-        },
-      },
-    },
     {
       "error": "unknown",
       "range": {
@@ -61,24 +41,11 @@ Text<element key="value" readonly>last name</element></root> 1`] = `
       "error": "expected start element end",
       "range": {
         "end": {
-          "column": 8,
+          "column": 9,
           "row": 1,
         },
         "start": {
-          "column": 7,
-          "row": 1,
-        },
-      },
-    },
-    {
-      "error": "unknown",
-      "range": {
-        "end": {
           "column": 8,
-          "row": 1,
-        },
-        "start": {
-          "column": 7,
           "row": 1,
         },
       },
@@ -138,14 +105,12 @@ Text<element key="value" readonly>last name</element></root> 1`] = `
   ],
   "root": {
     "attributes": {
-      "attribute": undefined,
-      "value": undefined,
+      "attribute": "value",
     },
     "content": [
       {
         "attributes": {
-          "key": undefined,
-          "value": undefined,
+          "key": "value",
         },
         "content": [],
         "name": "element",
@@ -159,51 +124,24 @@ Text<element key="value" readonly>last name</element></root> 1`] = `
 exports[`saxly.Parser parse <root attribute="value"></root> 1`] = `
 {
   "declaration": undefined,
-  "errors": [
-    {
-      "error": "expected start element end",
-      "range": {
-        "end": {
-          "column": 7,
-          "row": 0,
-        },
-        "start": {
-          "column": 6,
-          "row": 0,
-        },
-      },
-    },
-    {
-      "error": "unknown",
-      "range": {
-        "end": {
-          "column": 7,
-          "row": 0,
-        },
-        "start": {
-          "column": 6,
-          "row": 0,
-        },
-      },
-    },
-    {
-      "error": "unknown",
-      "range": {
-        "end": {
-          "column": 8,
-          "row": 0,
-        },
-        "start": {
-          "column": 7,
-          "row": 0,
-        },
-      },
-    },
-  ],
+  "errors": [],
   "root": {
     "attributes": {
-      "attribute": undefined,
-      "value": undefined,
+      "attribute": "value",
+    },
+    "content": [],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root readonly></root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [],
+  "root": {
+    "attributes": {
+      "readonly": undefined,
     },
     "content": [],
     "name": "root",
@@ -230,6 +168,116 @@ exports[`saxly.Parser parse <root></root> 1`] = `
   "root": {
     "attributes": {},
     "content": [],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root><nested/></root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [],
+  "root": {
+    "attributes": {},
+    "content": [
+      {
+        "attributes": {},
+        "content": [],
+        "name": "nested",
+      },
+    ],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root><nested></nested></root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [],
+  "root": {
+    "attributes": {},
+    "content": [
+      {
+        "attributes": {},
+        "content": [],
+        "name": "nested",
+      },
+    ],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root>first name</root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [],
+  "root": {
+    "attributes": {},
+    "content": [
+      "name",
+      "first",
+    ],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root>first<nested></nested>last</root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [],
+  "root": {
+    "attributes": {},
+    "content": [
+      "last",
+      {
+        "attributes": {},
+        "content": [],
+        "name": "nested",
+      },
+      "first",
+    ],
+    "name": "root",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root>first<nested>middle</nested>last</root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [
+    {
+      "error": "expected start element",
+      "node": {
+        "attributes": {},
+        "content": [
+          "middle",
+        ],
+        "name": "nested",
+      },
+    },
+  ],
+  "root": {
+    "attributes": {},
+    "content": [
+      "last",
+    ],
+    "name": "nested",
+  },
+}
+`;
+
+exports[`saxly.Parser parse <root>text</root> 1`] = `
+{
+  "declaration": undefined,
+  "errors": [],
+  "root": {
+    "attributes": {},
+    "content": [
+      "text",
+    ],
     "name": "root",
   },
 }
