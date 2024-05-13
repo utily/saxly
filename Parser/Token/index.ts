@@ -1,5 +1,5 @@
-import { Position } from "../../../Position"
-import { Range } from "../../../Range"
+import { Position } from "../../Position"
+import { Range } from "../../Range"
 
 export class Token {
 	constructor(readonly type: "whitespace" | "symbol" | "text", readonly content: string, readonly range: Range) {}

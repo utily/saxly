@@ -1,29 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`saxly.Parser parse <?xml version="1.0" language="en/US"?>
+exports[`saxly parse <?xml version="1.0" language="en/US"?>
 <root/> 1`] = `
 {
-  "declaration": {
-    "attributes": {
-      "language": "en/US",
-      "version": "1.0",
-    },
-    "type": "xml",
-  },
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root attribute="value">
+exports[`saxly parse <root attribute="value">
 Text<element key="value" readonly>last name</element></root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {
       "attribute": "value",
@@ -42,58 +33,55 @@ Text<element key="value" readonly>last name</element></root> 1`] = `
           " ",
           "name",
         ],
+        "errors": [],
         "name": "element",
       },
     ],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root attribute="value"></root> 1`] = `
+exports[`saxly parse <root attribute="value"></root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {
       "attribute": "value",
     },
     "content": [],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root readonly></root> 1`] = `
+exports[`saxly parse <root readonly></root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {
       "readonly": undefined,
     },
     "content": [],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root/> 1`] = `
+exports[`saxly parse <root/> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root>  first middle last</root> 1`] = `
+exports[`saxly parse <root>  first middle last</root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [
@@ -107,63 +95,61 @@ exports[`saxly.Parser parse <root>  first middle last</root> 1`] = `
       "
 ",
     ],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root></root> 1`] = `
+exports[`saxly parse <root></root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root><nested/></root> 1`] = `
+exports[`saxly parse <root><nested/></root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [
       {
         "attributes": {},
         "content": [],
+        "errors": [],
         "name": "nested",
       },
     ],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root><nested></nested></root> 1`] = `
+exports[`saxly parse <root><nested></nested></root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [
       {
         "attributes": {},
         "content": [],
+        "errors": [],
         "name": "nested",
       },
     ],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root><nested><inner/></nested></root> 1`] = `
+exports[`saxly parse <root><nested><inner/></nested></root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [
@@ -173,21 +159,22 @@ exports[`saxly.Parser parse <root><nested><inner/></nested></root> 1`] = `
           {
             "attributes": {},
             "content": [],
+            "errors": [],
             "name": "inner",
           },
         ],
+        "errors": [],
         "name": "nested",
       },
     ],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root>first name</root> 1`] = `
+exports[`saxly parse <root>first name</root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [
@@ -195,15 +182,14 @@ exports[`saxly.Parser parse <root>first name</root> 1`] = `
       " ",
       "name",
     ],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root>first<nested></nested>last</root> 1`] = `
+exports[`saxly parse <root>first<nested></nested>last</root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [
@@ -211,19 +197,19 @@ exports[`saxly.Parser parse <root>first<nested></nested>last</root> 1`] = `
       {
         "attributes": {},
         "content": [],
+        "errors": [],
         "name": "nested",
       },
       "last",
     ],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root>first<nested>middle</nested>last</root> 1`] = `
+exports[`saxly parse <root>first<nested>middle</nested>last</root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [
@@ -233,24 +219,25 @@ exports[`saxly.Parser parse <root>first<nested>middle</nested>last</root> 1`] = 
         "content": [
           "middle",
         ],
+        "errors": [],
         "name": "nested",
       },
       "last",
     ],
+    "errors": [],
     "name": "root",
   },
 }
 `;
 
-exports[`saxly.Parser parse <root>text</root> 1`] = `
+exports[`saxly parse <root>text</root> 1`] = `
 {
-  "declaration": undefined,
-  "errors": [],
   "root": {
     "attributes": {},
     "content": [
       "text",
     ],
+    "errors": [],
     "name": "root",
   },
 }

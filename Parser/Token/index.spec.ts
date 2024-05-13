@@ -1,5 +1,5 @@
 import "jest"
-import { Token } from "./"
+import { Token } from "."
 
 async function tokenize(data: string): Promise<Token[]> {
 	const result: Token[] = []
