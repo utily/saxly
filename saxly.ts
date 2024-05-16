@@ -7,7 +7,6 @@ import { Range } from "./Range"
 function parse(data: AsyncIterable<string> | string): Promise<Document | Document.Error> {
 	return Document.parse(data)
 }
-
 export const saxly = {
 	Document,
 	Error,

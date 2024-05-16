@@ -1,33 +1,12 @@
-import { Type } from "./Error/Type"
-import { Parser } from "./Parser"
-import { Range } from "./Range"
+import { isly } from "isly"
+import { Type } from "../../Error/Type"
+import { Range } from "../../Range"
+import { Simple } from "../Simple"
+import { Item } from "./Item"
 
-interface ItemStart {
-	type: "start"
-	name: string
-	attributes: Record<string, string | undefined>
-	range: Range
-}
-interface ItemElement<Element> {
-	type: "element"
-	content: Element
-	range: Range
-}
-interface ItemText<Text = string> {
-	type: "text"
-	content: Text
-	range: Range
-}
-interface ItemError<Error = void> {
-	type: "error"
-	content: Error
-	range: Range
-}
-type Item<Element, Text, Error> = ItemStart | ItemElement<Element> | ItemText<Text> | ItemError<Error>
-
-export class ElementParser<Element, Text = string, Error = void> {
+export class Full<Element, Text = string, Error = void> {
 	private readonly stack: Item<Element, Text, Error>[] = []
-	private readonly backend = Parser.create({
+	private readonly backend = Simple.create({
 		onStartElement: (name: string, attributes: Record<string, string | undefined>, range: Range): void => {
 			this.stack.push({ type: "start", name, attributes, range })
 		},
@@ -40,16 +19,16 @@ export class ElementParser<Element, Text = string, Error = void> {
 		},
 	})
 	private constructor(
-		private onElement: ElementParser.Callbacks<Element, Text, Error>["onElement"],
-		private onText: ElementParser.Callbacks<Element, Text, Error>["onText"],
-		private onError: ElementParser.Callbacks<Element, Text, Error>["onError"]
+		private onElement: Full.Callbacks<Element, Text, Error>["onElement"],
+		private onText: Full.Callbacks<Element, Text, Error>["onText"],
+		private onError: Full.Callbacks<Element, Text, Error>["onError"]
 	) {}
 	private onEndElement(name: string, range: Range): void {
 		const content: (Element | Text)[] = []
 		const errors: Error[] = []
 		let node = this.stack.pop()
-		while (node?.type != "start") {
-			if (node?.type == "error")
+		while (!Item.Start.is(node)) {
+			if (Item.Error.is(node))
 				errors.unshift(node.content)
 			else if (node)
 				content.unshift(node.content)
@@ -57,7 +36,7 @@ export class ElementParser<Element, Text = string, Error = void> {
 				errors.unshift(this.onError("expected element or text", range))
 			node = this.stack.pop()
 		}
-		if (node.type != "start" || node.name != name)
+		if (!Item.Start.is(node) || node.name != name)
 			errors.unshift(this.onError("expected start tag", node.range))
 		this.stack.push({
 			type: "element",
@@ -68,14 +47,7 @@ export class ElementParser<Element, Text = string, Error = void> {
 	async parse(data: AsyncIterable<string> | string): Promise<Element | Error> {
 		await this.backend.parse(data)
 		if (this.stack.length > 1) {
-			const startElements = this.stack
-				.filter(
-					(
-						item
-					): item is { type: "start"; name: string; attributes: Record<string, string | undefined>; range: Range } =>
-						item.type == "start"
-				)
-				.reverse()
+			const startElements = this.stack.filter(Item.Start.is).reverse()
 			for (const start of startElements) {
 				this.stack.unshift({
 					type: "error",
@@ -88,13 +60,11 @@ export class ElementParser<Element, Text = string, Error = void> {
 		const result = this.stack.pop()
 		return result?.type == "element" ? result.content : this.onError("expected start tag", result?.range ?? Range.zero)
 	}
-	static create<Element, Text, Error>(
-		callbacks: ElementParser.Callbacks<Element, Text, Error>
-	): ElementParser<Element, Text, Error> {
-		return new ElementParser(callbacks.onElement, callbacks.onText, callbacks.onError)
+	static create<Element, Text, Error>(callbacks: Full.Callbacks<Element, Text, Error>): Full<Element, Text, Error> {
+		return new Full(callbacks.onElement, callbacks.onText, callbacks.onError)
 	}
 }
-export namespace ElementParser {
+export namespace Full {
 	export interface Callbacks<Element, Text = string, Error = void> {
 		onElement: (
 			name: string,
@@ -104,5 +74,14 @@ export namespace ElementParser {
 		) => Element
 		onText: (value: string) => Text
 		onError: (error: Type, range: Range) => Error
+	}
+	export namespace Callbacks {
+		export const type = isly.object<Callbacks<any, any, any>>({
+			onElement: isly.function(),
+			onText: isly.function(),
+			onError: isly.function(),
+		})
+		export const is = type.is
+		export const flaw = type.flaw
 	}
 }

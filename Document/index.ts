@@ -1,6 +1,6 @@
 import { isly } from "isly"
-import { ElementParser } from "../ElementParser"
 import { Error as DocumentError } from "../Error"
+import { Parser } from "../Parser"
 import { Declaration as DocumentDeclaration } from "./Declaration"
 import { Element as DocumentElement } from "./Element"
 
@@ -22,14 +22,14 @@ export namespace Document {
 	export type Declaration = DocumentDeclaration
 	export const Declaration = DocumentDeclaration
 	export async function parse(data: AsyncIterable<string> | string): Promise<Document | Error> {
-		const parser = ElementParser.create<Element, string, Error>({
+		const parser = Parser.create<Element, string, Error>({
 			onElement: (name, attributes, content, errors) => ({
 				name,
 				attributes,
 				content,
 				errors,
 			}),
-			onText: value => value,
+			onText: (value: string) => value,
 			onError: (error, range) => ({
 				error,
 				range,

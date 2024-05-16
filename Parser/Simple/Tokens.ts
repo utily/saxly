@@ -1,5 +1,5 @@
-import { AsyncEnumerator } from "../AsyncEnumerator"
-import { Range } from "../Range"
+import { AsyncEnumerator } from "../../AsyncEnumerator"
+import { Range } from "../../Range"
 import { Token } from "./Token"
 
 export class Tokens extends AsyncEnumerator<Token> {
