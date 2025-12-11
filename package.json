@@ -1,6 +1,6 @@
 {
 	"name": "saxly",
-	"version": "0.0.27",
+	"version": "0.0.28",
 	"description": "XML parsers implementing SAX interface and higher levels.",
 	"author": "Utily Contributors",
 	"license": "MIT",
